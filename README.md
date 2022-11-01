@@ -1,2 +1,1 @@
-# mcstory
-wikiSTEVE-ia
+# TNPG: STEVE, Roster: Ryan Lee, Joseph Jeon, Samson Wu
