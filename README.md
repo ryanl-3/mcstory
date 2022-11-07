@@ -1,8 +1,8 @@
 # MCStory by STEVE
 ## Roster: 
-* Ryan Lee: PM, Database guy
+* Ryan Lee: Database guy
 * Joseph Jeon: HTML/Frontend guy
-* Samson Wu: Flask guy
+* Samson Wu: PM, Flask guy
 
 ## Description:
 A collaborative Minecraft story making website.
