@@ -1,1 +1,2 @@
 josephJ -- 2022-11-10 13:35
+samsonW Setup the flask routes to the index, login, signup, about, donate, and login 2022-11-10 14:41
