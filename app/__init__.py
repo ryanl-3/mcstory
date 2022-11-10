@@ -36,7 +36,7 @@ def signup():
     if request.method == 'POST' and check_username(request.form['signup_username']) == 1 and check_password(request.form['signup_password']) == 0:
         return render_template("signup.html", failmsg='Password is too short!')
     if request.method == 'POST' and check_username(request.form['signup_username']) == 0 and check_password(request.form['signup_password']) == 0:
-        return render_template("signup.html", failmsg='Please enter a user and password')
+        return render_template("signup.html", failmsg='Please enter a valid username and password!')
     return render_template("signup.html", failmsg='')
 
 @app.route('/logout')
@@ -46,6 +46,30 @@ def logout():
     print("\nPopped the cookie\n")
     login_status = False
     return redirect(url_for('index'))
+
+@app.route('/aboutus')
+def aboutus():
+    login_status = False
+    if 'username' in session:
+        login_status = True
+        return render_template("about.html", loginstatus=login_status)
+    return render_template("about.html", loginstatus=login_status) #'You are not logged in'
+
+@app.route('/donate')
+def donate():
+    login_status = False
+    if 'username' in session:
+        login_status = True
+        return render_template("donate.html", loginstatus=login_status)
+    return render_template("donate.html", loginstatus=login_status) #'You are not logged in'
+
+@app.route('/profile')
+def profile():
+    login_status = False
+    if 'username' in session:
+        login_status = True
+        return render_template("profile.html", loginstatus=login_status)
+    return render_template("profile.html", loginstatus=login_status) #'You are not logged in'
 
 def check_password(password):
     if len(password) < 8:
