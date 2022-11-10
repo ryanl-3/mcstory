@@ -12,7 +12,17 @@
 			YOU ARE NOT LOGGED IN.
 		{% endif %}
 
-		<p><a href="login.html">Login</a></p>
+		{% if loginstatus %}
+        <a href="/logout">
+            <button>Logout</button>
+        </a>
+        {% else %}
+        <a href="/login">
+            <button>Login</button>
+        </a>
+        {% endif %}
+
+
 		<h1>Minecraft Story Mode</h1>
 		<h2>
 			<a href="index.html">Home</a> |
