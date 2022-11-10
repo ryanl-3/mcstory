@@ -6,6 +6,12 @@
 	</head>
 
 	<body>
+		{% if loginstatus %}
+			YOU ARE LOGGED IN.
+		{% else %}
+			YOU ARE NOT LOGGED IN.
+		{% endif %}
+
 		<p><a href="login.html">Login</a></p>
 		<h1>Minecraft Story Mode</h1>
 		<h2>
