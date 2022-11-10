@@ -2,11 +2,14 @@
 <html>
     <head>
         <title>STEVE SITE</title>
+        <link rel="stylesheet" href="../static/css/style.css">
     </head>
+
     <body>
         <h1>
             Minecraft Story Mode
         </h1>
+
         <p>
             Login Status: {{ loginstatus }} 
             <br>
@@ -14,6 +17,7 @@
             Welcome {{ user }}
             {% endif %}
         </p>
+        
         <p>
             {% if loginstatus %}
             <a href="/logout">
