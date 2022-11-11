@@ -30,6 +30,11 @@ a{
 	width:50%;
 }
 
+#story{
+	width:100%;
+	height:500px;
+}
+
 form{
 	padding: 10px;
 }

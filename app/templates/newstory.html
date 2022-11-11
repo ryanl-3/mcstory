@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Minecraft Story Mode</title>
+		<link rel="stylesheet" href="../static/css/style.css">
+	</head>
+
+	<body>
+
+		<h1>Minecraft Story Mode</h1>
+
+		<p>
+            {{failmsg}}
+        </p>
+        {% if loginstatus %}
+            <form method="POST">
+                <p>
+                    Title: <br>
+                    <input type=text name=title>
+                </p>
+                <p>
+                    Story:<br><br>
+                    <textarea id="story" type=text name=text rows="5" cols="33">Once upon a time...</textarea>
+                </p>
+                <input type=submit value="Submit Your Story!">
+            </form>
+        {% else %}
+            You must be logged in to use this feature.
+        {% endif %}
+	</body>
+</html>
