@@ -1,1 +1,3 @@
-josephJ -- 2022-11-10 13:35
+josephJ Created html pages for login, response, and home 2022-11-10 13:35
+samsonW Setup the flask routes to the index, login, signup, about, donate, and login 2022-11-10 14:41
+ryanL Created the users and stories tables with functions to access and store in tables 2022-11-11 00:26
