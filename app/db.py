@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_FILE="mcstory.db"
+DB_FILE="mcstorytest.db"
 
 db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
 c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
@@ -13,7 +13,8 @@ c.execute("CREATE TABLE stories(username TEXT, title TEXT, content TEXT, ID INTE
 
 #adds user to user database
 def add_user(username, password):
-    c.execute("INSERT INTO users VALUES(\"" + username + "\", \"" + password + "\");")
+    data = (username, password)
+    c.execute("INSERT INTO users VALUES(?,?)", data)
 
 #checks if a user exists
 def user_exist(username):
@@ -39,7 +40,8 @@ def get_user_pass(username):
 #adds story to stories database
 def add_story(username, title, content, ID):
     if user_exist(username):
-        c.execute("INSERT INTO stories VALUES(\"" + username + "\", \"" + title + "\", \"" + content + "\", " + ID + ");")
+        data = (username, title, content, ID)
+        c.execute("INSERT INTO stories VALUES(?, ?, ?, ?)", data)
     else:
         print(username + " USER DOES NOT EXIST")
         
@@ -55,12 +57,12 @@ def story_exist(title):
 
 #testing code
 #add_user("r1","pass1")
-#add_user("r2","pass2")
+add_user("r2","pass2")
 #add_user("r3","pass3")
 #print(user_exist("r1"))
 #print(get_user_pass("r1"))
 #add_story("r1", "harry potter", "once upon a time", "101")
-#add_story("r", "harry potter part 2", "once upon a time there was", "102")
+add_story("r2", "harry potter part 2", "once upon a time there was", "102")
 #print(story_exist("harry potter part 2"))
 #print(story_exist("harry potter"))
 

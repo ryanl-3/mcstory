@@ -4,3 +4,4 @@ ryanL Created the users and stories tables with functions to access and store in
 josephJ Created newstory.html and editstory.html with forms for them 2022-11-11 11:01
 josephJ Added donate.html and profile.html 2022-11-11 11:01
 samsonW Made working login/signup with databases (NEEDS TESTING!) 2022-11-11 21:00
+ryanL Fixed db functions with "?"s to catch bad injections. 2022-11-12 00:25
