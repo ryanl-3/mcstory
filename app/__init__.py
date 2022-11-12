@@ -83,11 +83,17 @@ def story_exist(title, db_cursor):
 
 @app.route('/')
 def index():
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor() 
+    # recentstorytitle = get_most_recent_story()
+    # recentstorycontent = get_most_recent_story_title()
     login_status = False
     if 'username' in session:
         login_status = True
-        return render_template("index.html", loginstatus=login_status)
-    return render_template("index.html", loginstatus=login_status) #'You are not logged in'
+        db.close()
+        return render_template("index.html", loginstatus=login_status, recent_story_title='test', recent_story_content='balh blah')
+    db.close()
+    return render_template("index.html", loginstatus=login_status, recent_story_title='test', recent_story_content='balh blah') #'You are not logged in'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
