@@ -7,3 +7,4 @@ samsonW Made working login/signup with databases (NEEDS TESTING!) 2022-11-11 21:
 ryanL Fixed db functions with "?"s to catch bad injections. 2022-11-12 00:25
 josephJ Added link to login.html on signup.html 2022-11-12 10:12
 samsonW Prepared recent story display on index.html. Waiting on sqlite3 helper functions 2022-11-12 10:25
+ryanL Imported datetime, added column date to stories db, edited add_story function to include time/date, added recent_story, print_users, and print_stories functions 2022-11-12 16:59

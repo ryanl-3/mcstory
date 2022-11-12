@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 DB_FILE="mcstorytest.db"
 
@@ -8,8 +9,8 @@ c = db.cursor()               #facilitate db ops -- you will use cursor to trigg
 #users table stores the username and password
 c.execute("CREATE TABLE users(username TEXT, password TEXT);")
 
-#stories table stores the story title, content, and id
-c.execute("CREATE TABLE stories(username TEXT, title TEXT, content TEXT, ID INTEGER);")
+#stories table stores the story title, content, id, and time
+c.execute("CREATE TABLE stories(username TEXT, title TEXT, content TEXT, ID INTEGER, time TEXT);")
 
 #adds user to user database
 def add_user(username, password):
@@ -40,8 +41,10 @@ def get_user_pass(username):
 #adds story to stories database
 def add_story(username, title, content, ID):
     if user_exist(username):
-        data = (username, title, content, ID)
-        c.execute("INSERT INTO stories VALUES(?, ?, ?, ?)", data)
+        now = datetime.now()
+        dt_string = now.strftime("%B %d, %Y %H:%M:%S")
+        data = (username, title, content, ID, dt_string)
+        c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?)", data)
     else:
         print(username + " USER DOES NOT EXIST")
         
@@ -55,16 +58,51 @@ def story_exist(title):
         return False
     return True
 
+def recent_story():
+    c.execute("SELECT * FROM stories")
+    
+    rows = c.fetchall()
+    
+    if rows == []:#if empty list then no story
+        print("There are no stories in the database")
+    
+    for row in rows:
+        story = row
+    print(story)
+
+def print_users():
+    print("Username, Password")
+    c.execute("SELECT * FROM users")
+    
+    rows = c.fetchall()
+    
+    for row in rows:
+        print(row)
+    
+def print_stories():
+    print("Username, Title, Content, ID")
+    c.execute("SELECT * FROM stories")
+    
+    rows = c.fetchall()
+    
+    for row in rows:
+        print(row)
+        
+
+
 #testing code
 #add_user("r1","pass1")
-add_user("r2","pass2")
+#add_user("r2","pass2")
 #add_user("r3","pass3")
 #print(user_exist("r1"))
 #print(get_user_pass("r1"))
 #add_story("r1", "harry potter", "once upon a time", "101")
-add_story("r2", "harry potter part 2", "once upon a time there was", "102")
+#add_story("r2", "harry potter part 2", "once upon a time there was", "102")
 #print(story_exist("harry potter part 2"))
 #print(story_exist("harry potter"))
+#print_users()
+#print_stories()
+#recent_story()
 
 db.commit() #save changes
 db.close() #close database
