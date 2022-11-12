@@ -23,9 +23,6 @@ db.close()
 app = Flask(__name__)
 app.secret_key = b'_MinecraftSTEVE'
 
-validuser = 'admin'
-validpass = 'admin'
-
 #Helper Functions:
 def check_password(password):
     if len(password) < 8:
@@ -39,7 +36,8 @@ def check_username(username):
 
 #adds user to user database
 def add_user(username, password, db_cursor):
-    db_cursor.execute("INSERT INTO users VALUES(\"" + username + "\", \"" + password + "\");")
+    data = (username, password)
+    db_cursor.execute("INSERT INTO users VALUES(?,?)", data)
 
 #checks if a user exists
 def user_exist(username, db_cursor):
@@ -65,7 +63,8 @@ def get_user_pass(username, db_cursor):
 #adds story to stories database
 def add_story(username, title, content, ID, db_cursor):
     if user_exist(username, db_cursor):
-        db_cursor.execute("INSERT INTO stories VALUES(\"" + username + "\", \"" + title + "\", \"" + content + "\", " + ID + ");")
+        data = (username, title, content, ID)
+        db_cursor.execute("INSERT INTO stories VALUES(?, ?, ?, ?)", data)
     else:
         print(username + " USER DOES NOT EXIST")
         
@@ -78,6 +77,7 @@ def story_exist(title, db_cursor):
     if rows == []:#if empty list then no story
         return False
     return True
+
 
 #Start of Flask stuff
 
@@ -120,7 +120,7 @@ def signup():
             db.close()
             return redirect(url_for('login'))
         db.close()
-        return render_template("signup.html", failmsg='Username already exists!')
+        return render_template("signup.html", failmsg='Username already exists. Please login.')
     if request.method == 'POST' and check_username(request.form['signup_username']) == 0 and check_password(request.form['signup_password']) == 1:
         return render_template("signup.html", failmsg='Username is too short!')
     if request.method == 'POST' and check_username(request.form['signup_username']) == 1 and check_password(request.form['signup_password']) == 0:
