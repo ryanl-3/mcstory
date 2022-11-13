@@ -22,7 +22,11 @@
             {{failmsg}}
         </p>
         {% if loginstatus %}
-            <p>previous entry here</p>
+            <form method="POST">
+            {% for story in flask_list_stories %}
+                <p><input type=submit value={{story[1]}} name="title"></p>
+            {% endfor %}
+            </form>
 
             <form method="POST">
                 <p>

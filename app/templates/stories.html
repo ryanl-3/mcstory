@@ -32,9 +32,12 @@
 			<a href="/editstory">Edit Story</a> |
 			<a href="/profile">Profile</a> 
 		</h2>
-		<h2>Most recent story</h2>
-		<h3><a href={{current_story_link}}>{{recent_story_title}} by {{recent_story_user}}</a></h3>
-		<p>{{recent_story_date}}</p>
-		<p>{{recent_story_content}}</p>
+        {% if valid %}
+            <h3>{{recent_story_title}} by {{recent_story_user}}</h3>
+		    <p>{{recent_story_date}}</p>
+		    {{recent_story_content}}
+        {% else %}
+            {{failmsg}}
+        {% endif %}
 	</body>
 </html>

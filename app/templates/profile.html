@@ -30,6 +30,14 @@
 			<a href="/editstory">Edit Story</a> |
 			<a href="/profile">Profile</a> 
 		</h2>
-		<p>profile stuff</p>
+		<p>	{% if loginstatus %}
+			<p>Username: {{username}}</p>
+			<p>Stories: {{number_stories}}</p>
+			{% for story in flask_list_stories %}
+				<p><a href=/stories?id={{story[3]}}>{{story[1]}}</a></p>
+			{% endfor %}
+		{% else %}
+			Please login.
+		{% endif %}</p>
 	</body>
 </html>
