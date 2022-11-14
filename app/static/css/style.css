@@ -1,15 +1,14 @@
 body{
-	font-family: Helvetica, sans-serif;
+	font-family: Courier New, sans-serif;
 	margin-left:5%;
 	margin-right:5%;
+	
+	background-size:100px;
 	background-image:url(https://i.pinimg.com/originals/2a/b1/c3/2ab1c37cfdff720c6de2ddb07328f145.jpg);
-	background-size:200px;
-	background-color: rgba(177,135,99,0.3);
-	background-blend-mode: lighten;
-	color:white;
+	color:rgb(250,250,250);
 }
 
-h1{
+h1, #logo{
 	text-align: center;
 	font-size: 70px;
 	margin-top:-30px;
@@ -37,6 +36,7 @@ h4{
 
 p{
 	font-size: 25px;
+	font-weight: bold;
 }
 
 a{
@@ -86,7 +86,8 @@ hr{
 .story-container{
 	border:1px solid rgb(20,225,100);
 	padding-left:30px;
-	background-image: linear-gradient(to left, rgba(20,225,100,0.5) , rgba(255,255,255,0.1));
+	padding-right:30px;
+	background-image: linear-gradient(to left, rgba(20,225,100,0.3) , rgba(255,255,255,0.1));
 }
 
 form{
