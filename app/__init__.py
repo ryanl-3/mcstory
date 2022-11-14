@@ -35,6 +35,10 @@ def check_username(username):
         return 0
     return 1
 
+def Union(lst1, lst2):
+    final_list = list(set(lst1) | set(lst2))
+    return final_list
+
 #adds user to user database
 def add_user(username, password, db_cursor):
     data = (username, password)
@@ -248,10 +252,13 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST' and check_username(request.form['signup_username']) == 1 and check_password(request.form['signup_password']) == 1:
+        if not request.form['signup_password'] == request.form['signup_password_check']:
+            return render_template("signup.html", failmsg='Passwords dont match!')
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
         signup_username = request.form['signup_username']
         signup_password = request.form['signup_password']
+        signup_password_check = request.form['signup_password_check']
         if not user_exist(signup_username, c):
             add_user(signup_username, signup_password, c)
             db.commit()
@@ -297,6 +304,8 @@ def profile():
     login_status = False
     if 'username' in session:
         login_status = True
+    if not login_status:
+        return render_template("profile.html", loginstatus=login_status)
     try:
         currentuser=request.args['id']
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
@@ -408,7 +417,7 @@ def search():
         db = sqlite3.connect(DB_FILE)
         c = db.cursor()
         searchcontent = request.args['search']
-        storieslist = get_stories_by_title(searchcontent, c) + get_stories_by_user(searchcontent, c)
+        storieslist = Union(get_stories_by_title(searchcontent, c), get_stories_by_user(searchcontent, c))
         userslist = get_users_by_name(searchcontent, c)
         db.close()
         return render_template("search.html", loginstatus=login_status, flask_stories_results=storieslist, flask_users_results=userslist)
