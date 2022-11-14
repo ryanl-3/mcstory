@@ -20,4 +20,4 @@ A collaborative Minecraft story making website.
 #### Install requirements:
 	pip install -r requirements.txt
 #### Run Flask app:
-	python3 __init.py__
+	python3 __init__.py
