@@ -30,6 +30,7 @@
         </h2><hr>
 
         {% if loginstatus %}
+        <h3>Choose a story:</h3>
         {% for story in flask_list_stories %}
         <p><a href=/editstory?id={{story[3]}}>{{story[1]}}</a></p>
         {% endfor %}
