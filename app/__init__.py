@@ -9,17 +9,14 @@ DB_FILE="mcstory.db"
 db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
 c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
 
-# c.execute("DROP TABLE IF EXISTS users;")
-# c.execute("DROP TABLE IF EXISTS stories;")
+c.execute("DROP TABLE IF EXISTS users;")
+c.execute("DROP TABLE IF EXISTS stories;")
 
 #users table stores the username and password
 c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT);")
 
 #stories table stores the story title, content, id, and time
 c.execute("CREATE TABLE IF NOT EXISTS stories(username TEXT, title TEXT, content TEXT, ID INTEGER, time TEXT);")
-
-db.commit()
-db.close()
 
 app = Flask(__name__)
 app.secret_key = b'_MinecraftSTEVE'
@@ -212,6 +209,38 @@ def edit_story(title, content, db_cursor):#goes to the story with the title and 
         db_cursor.execute("DELETE FROM stories WHERE title=?", (title,))
     
         add_story(username, title, content, ID, db_cursor)# the edited story will have the date of the most recent edit
+
+#Preset database
+add_user('samson', 'samson123', c)
+add_user('joseph', 'qwertyuiop', c)
+add_user('ryan', "asdfghjkl", c)
+
+add_story('samson', 'The Bogey Beast', '''A woman finds a pot of treasure on the road while she is returning from work.
+
+Delighted (very happy) with her luck, she decides to keep it. As she is taking it home, it keeps changing.
+
+However, her enthusiasm refuses to fade away (disappear or faint slowly).
+
+What Is Great About It: The old lady in this story is one of the most cheerful characters anyone can encounter in English fiction.
+
+Her positive disposition (personality) tries to make every negative situation seem like a gift, and she helps us look at luck as a matter of our view rather than events.''', 0, c)
+
+add_story('joseph', 'The Turtle and the Hare', '''This classic fable (story) tells the story of a very slow tortoise (turtle) and a speedy hare (rabbit).
+
+The tortoise challenges the hare to a race. The hare laughs at the idea that a tortoise could run faster than he, but the race leads to surprising results.
+
+What Is Great About It: Have you ever heard the English expression, “Slow and steady wins the race”? This story is the basis for that common phrase.
+
+This timeless (classic) short story teaches a lesson that we all know but can sometimes forget: Natural talent is no substitute for hard work, and overconfidence often leads to failure.''', 1, c)
+
+add_story('ryan', 'The Tale of Johnny Town Mouse', '''Timmie Willie is a country mouse who is accidentally taken to a city in a vegetable basket. When he wakes up, he finds himself at a party and makes a friend.
+
+When he is unable to bear (tolerate or experience) the city life, he returns to his home but invites his friend to the village.
+
+When his friend visits him, something similar happens.''', 2, c)
+
+db.commit()
+db.close()
 
 #Start of Flask stuff
 
