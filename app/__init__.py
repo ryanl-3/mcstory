@@ -343,10 +343,10 @@ def editstory():
 def stories():
     #print(request.args['id'])
     login_status = False
-    isvalidstory = not request.args['id'] == None
+    isvalidstory = not request.args['id'] == 'None'
     if 'username' in session:
         login_status = True
-    if request.args['id'] == None:
+    if request.args['id'] == 'None':
         return render_template("stories.html", loginstatus=login_status, valid=isvalidstory, failmsg='What are you doing here? Go back.')
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor() 
