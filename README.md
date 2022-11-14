@@ -11,9 +11,9 @@ A collaborative Minecraft story making website.
 ### Cloning:
 	git clone git@github.com:ryanl-3/mcstory.git
 ### Virtual Environment:
-Change into the mcstory directory:
+#### Change into the mcstory directory:
 	python3 -m venv venv
-Activate the virtual environment:
+#### Activate the virtual environment:
 	. venv/bin/activate
-Install requirements:
+#### Install requirements:
 	pip install -r requirements.txt
