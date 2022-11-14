@@ -19,3 +19,5 @@ A collaborative Minecraft story making website.
 	. venv/bin/activate
 #### Install requirements:
 	pip install -r requirements.txt
+#### Run Flask app:
+	python3 __init.py__
