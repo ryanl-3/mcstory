@@ -11,4 +11,4 @@ ryanL Imported datetime, added column date to stories db, edited add_story funct
 samsonW Created /stories to view stories. Added recent story to homepage. Added stories list to profile. 2022-11-13 15:12
 ryanL Created a edit_story function to edit a content with the title name and replacment content 2022-11-13 21:55
 josephJ Styled most of the pages, rerouted some pages. 2022-11-14 01:07
-samsonW editstory works now with the help of Ryan's helper function. 2022-11-14 8:27
+samsonW editstory works now with the help of Ryan's helper function. Added a 'none' story page 2022-11-14 8:27
