@@ -88,6 +88,7 @@ hr{
 	padding-left:30px;
 	padding-right:30px;
 	background-image: linear-gradient(to left, rgba(20,225,100,0.3) , rgba(255,255,255,0.1));
+	margin-bottom:30px;
 }
 
 form{
