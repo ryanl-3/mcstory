@@ -75,7 +75,7 @@ hr{
 	height:30px;
 	width:50%;
 	font-size:20px;
-	border-radius:25px;
+	border-radius:15px;
 	padding-left:10px;
 }
 
@@ -89,6 +89,13 @@ hr{
 	padding-right:30px;
 	background-image: linear-gradient(to left, rgba(20,225,100,0.3) , rgba(255,255,255,0.1));
 	margin-bottom:30px;
+}
+
+.search-button{
+	margin-left:-110px;
+	height:40px;
+	width:100px;
+	border-radius:22px;
 }
 
 form{
