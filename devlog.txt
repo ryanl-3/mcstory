@@ -15,3 +15,5 @@ samsonW editstory works now with the help of Ryan's helper function. Added a 'no
 samsonW updated readme and requirements 2022-11-14 9:05
 samsonW added recent stories and failmsg to editstories 2022-11-14 11:01
 samsonw added search bar. needs a search button on nav (html) 2022-11-14 12:57
+josephJ added search on nav 2022-11-14 13:50
+samsonW separated functions from __init__.py to db.py 2022-11-14 14:46
