@@ -9,3 +9,4 @@ josephJ Added link to login.html on signup.html 2022-11-12 10:12
 samsonW Prepared recent story display on index.html. Waiting on sqlite3 helper functions 2022-11-12 10:25
 ryanL Imported datetime, added column date to stories db, edited add_story function to include time/date, added recent_story, print_users, and print_stories functions 2022-11-12 16:59
 samsonW Created /stories to view stories. Added recent story to homepage. Added stories list to profile. 2022-11-13 15:12
+ryanL Created a edit_story function to edit a content with the title name and replacment content 2022-11-13 21:55

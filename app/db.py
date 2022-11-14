@@ -88,6 +88,22 @@ def print_stories():
     for row in rows:
         print(row)
         
+def edit_story(title, content):#goes to the story with the title and replaces its content with the input content
+    c.execute("SELECT * FROM stories WHERE title=?", (title,))
+    
+    rows = c.fetchall()
+    
+    if rows == []:#if empty list then no story
+        print("There is no story with this title name")
+    else:
+        for row in rows:
+            username = row[0]
+            ID = row[3]
+        
+        c.execute("DELETE FROM stories WHERE title=?", (title,))
+    
+        add_story(username, title, content, ID)# the edited story will have the date of the most recent edit
+        
 
 
 #testing code
@@ -97,12 +113,13 @@ def print_stories():
 #print(user_exist("r1"))
 #print(get_user_pass("r1"))
 #add_story("r1", "harry potter", "once upon a time", "101")
-#add_story("r2", "harry potter part 2", "once upon a time there was", "102")
+#add_story("r1", "harry potter part 2", "once upon a time there was", "102")
 #print(story_exist("harry potter part 2"))
 #print(story_exist("harry potter"))
 #print_users()
 #print_stories()
 #recent_story()
+#edit_story("harry potter", "story content")
 
 db.commit() #save changes
 db.close() #close database
