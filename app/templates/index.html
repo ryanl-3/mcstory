@@ -35,12 +35,14 @@
 			<a href="/profile">Profile</a> 
 		</h2><hr>
 
-		<h3>Most Recent Story</h3>
+		<h3>Recent Stories</h3>
 
+		{% for story in flask_list_stories %}
 		<div class="story-container">
-			<h4><a href={{current_story_link}}>{{recent_story_title}} by {{recent_story_user}}</a></h4>
-			<p id="date">{{recent_story_date}}</p>
-			<p>{{recent_story_content}}</p>
+			<h4><a href=/stories?id={{story[3]}}>{{story[1]}} by {{story[0]}}</a></h4>
+			<p id="date">{{story[4]}}</p>
+			<p>{{story[2]}}</p>
 		</div>
+		{% endfor %}
 	</body>
 </html>

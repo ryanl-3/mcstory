@@ -9,8 +9,8 @@ DB_FILE="mcstory.db"
 db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
 c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
 
-#c.execute("DROP TABLE IF EXISTS users;")
-#c.execute("DROP TABLE IF EXISTS stories;")
+# c.execute("DROP TABLE IF EXISTS users;")
+# c.execute("DROP TABLE IF EXISTS stories;")
 
 #users table stores the username and password
 c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT);")
@@ -127,6 +127,13 @@ def get_total_number_stories(db_cursor):
     
     return counter
 
+def get_all_stories(db_cursor):
+    db_cursor.execute("SELECT * FROM stories")
+    
+    rows = db_cursor.fetchall()
+
+    return rows
+
 def get_user_stories(username, db_cursor):
     db_cursor.execute("SELECT * FROM stories WHERE username=?", (username,))
     
@@ -156,6 +163,22 @@ def get_story_by_id(id, db_cursor):
 
     return rows[0]
 
+def edit_story(title, content, db_cursor):#goes to the story with the title and replaces its content with the input content
+    db_cursor.execute("SELECT * FROM stories WHERE title=?", (title,))
+    
+    rows = db_cursor.fetchall()
+    
+    if rows == []:#if empty list then no story
+        print("There is no story with this title name")
+    else:
+        for row in rows:
+            username = row[0]
+            ID = row[3]
+        
+        db_cursor.execute("DELETE FROM stories WHERE title=?", (title,))
+    
+        add_story(username, title, content, ID, db_cursor)# the edited story will have the date of the most recent edit
+
 #Start of Flask stuff
 
 @app.route('/')
@@ -163,24 +186,17 @@ def index():
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor() 
     print_stories(c)
-    recentstoryuser = 'No user'
-    recentstorytitle = 'No title'
-    recentstorycontent = 'No stories'
-    recentstorydate = 'No date'
-    current_story_id = None
-    if not recent_story(c) == None: 
-        recentstoryuser = recent_story(c)[0]
-        recentstorytitle = recent_story(c)[1]
-        recentstorycontent = recent_story(c)[2]
-        recentstorydate = recent_story(c)[4]
-        current_story_id = recent_story(c)[3]
+    storieslist = get_all_stories(c)
+    storieslist = storieslist[::-1]
+    if(len(storieslist) == 0):
+        storieslist = [('No user', 'No title', 'No story', None, 'No date')]
     login_status = False
     if 'username' in session:
         login_status = True
         db.close()
-        return render_template("index.html", loginstatus=login_status, username = session['username'], current_story_link="/stories?id=" + str(current_story_id), recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser)
+        return render_template("index.html", loginstatus=login_status, username = session['username'], flask_list_stories=storieslist)
     db.close()
-    return render_template("index.html", loginstatus=login_status, current_story_link="/stories?id=" + str(current_story_id), recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser) #'You are not logged in'
+    return render_template("index.html", loginstatus=login_status, flask_list_stories=storieslist) #'You are not logged in'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -284,31 +300,56 @@ def newstory():
 @app.route('/editstory', methods=['GET', 'POST'])
 def editstory():
     login_status = False
-    if 'username' in session:
-        login_status = True
-        db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
-        c = db.cursor()
-        userstorieslist = get_user_stories(session['username'], c)
-        if request.method == 'POST':
-            title = request.form['title']
-            print(title)
+    try:
+        if 'username' in session:
+            login_status = True
+            db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+            c = db.cursor()
+            userstorieslist = get_user_stories(session['username'], c)
+            currentid = request.args['id']
+            currentstory = get_story_by_id(currentid, c)
+            if(currentstory[0] == session['username']):
+                print("matching id and user")
+                currentstorycontent = currentstory[2]
+            else:
+                print("not matching user and id")
+                db.close()
+                return redirect(url_for(edit_story))
+            if request.method == 'POST':
+                print("editing story")
+                newcontent = request.form['addition']
+                currenttitle = currentstory[1]
+                edit_story(currenttitle, newcontent, c)
+                db.commit()
+                print(currentstory[2]) 
+                db.close()
+                return redirect(url_for('index'))
+            return render_template("editstory.html", loginstatus=login_status, flask_list_stories=userstorieslist, current_story_stuff=currentstorycontent, selected_story=currentstory[1], story_is_selected=True)
+        return render_template("editstory.html", loginstatus=login_status)
+    except:
+        if 'username' in session:
+            fail_msg = ''
+            login_status = True
+            db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+            c = db.cursor()
+            userstorieslist = get_user_stories(session['username'], c)
+            if len(userstorieslist) == 0:
+                fail_msg = 'No stories'
+            if request.method == 'POST':
+                db.close()
+                return redirect(url_for('editstory'))
             db.close()
-            return redirect(url_for('index'))
-        previousentry = "No stories yet!"
-        if not recent_story(c) == None:
-            previousentry = recent_story(c)[1]
-        db.close()
-        return render_template("editstory.html", loginstatus=login_status, previous_entry=previousentry, flask_list_stories=userstorieslist)
-    return render_template("editstory.html", loginstatus=login_status) #'You are not logged in'
+            return render_template("editstory.html", loginstatus=login_status, flask_list_stories=userstorieslist, selected_story='No story selected', story_is_selected=False, failmsg = fail_msg)
+        return render_template("editstory.html", loginstatus=login_status) #'You are not logged in'
 
 @app.route('/stories')
 def stories():
     #print(request.args['id'])
     login_status = False
-    isvalidstory = not request.args['id'] == None
+    isvalidstory = not request.args['id'] == 'None'
     if 'username' in session:
         login_status = True
-    if request.args['id'] == None:
+    if request.args['id'] == 'None':
         return render_template("stories.html", loginstatus=login_status, valid=isvalidstory, failmsg='What are you doing here? Go back.')
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor() 
