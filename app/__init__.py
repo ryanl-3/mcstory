@@ -177,6 +177,8 @@ def index():
     login_status = False
     if 'username' in session:
         login_status = True
+        db.close()
+        return render_template("index.html", loginstatus=login_status, username = session['username'], current_story_link="/stories?id=" + str(current_story_id), recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser)
     db.close()
     return render_template("index.html", loginstatus=login_status, current_story_link="/stories?id=" + str(current_story_id), recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser) #'You are not logged in'
 
@@ -233,15 +235,15 @@ def aboutus():
     login_status = False
     if 'username' in session:
         login_status = True
-        return render_template("about.html", loginstatus=login_status)
-    return render_template("about.html", loginstatus=login_status) #'You are not logged in'
+        return render_template("about.html", username = session['username'], loginstatus=login_status)
+    return render_template("about.html",  loginstatus=login_status) #'You are not logged in'
 
 @app.route('/donate')
 def donate():
     login_status = False
     if 'username' in session:
         login_status = True
-        return render_template("donate.html", loginstatus=login_status)
+        return render_template("donate.html", username = session['username'], loginstatus=login_status)
     return render_template("donate.html", loginstatus=login_status) #'You are not logged in'
 
 @app.route('/profile')

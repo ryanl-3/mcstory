@@ -6,30 +6,27 @@
 	</head>
 
 	<body>
-		{% if loginstatus %}
-			[debug] YOU ARE LOGGED IN.
-		{% else %}
-			[debug] YOU ARE NOT LOGGED IN.
-		{% endif %}
+		<div id="login_logout_button">
+			{% if loginstatus %}
+	        <a href="/logout">
+	            <button>Logout</button>
+	        </a>
+	        {% else %}
+	        <a href="/login">
+	            <button>Login</button>
+	        </a>
+	        {% endif %}
+	    </div>
 
-		{% if loginstatus %}
-		<a href="/logout">
-			<button>Logout</button>
-		</a>
-		{% else %}
-		<a href="/login">
-			<button>Login</button>
-		</a>
-		{% endif %}
 		<h1>Minecraft Story Mode</h1>
-		<h2>
+		<hr><h2>
 			<a href="/">Home</a> |
 			<a href="/aboutus">About Us</a> |
 			<a href="/donate">Donate</a> | 
 			<a href="/newstory">New Story</a> |
 			<a href="/editstory">Edit Story</a> |
 			<a href="/profile">Profile</a> 
-		</h2>
-		<p>We Are STEVE...</p>
+		</h2><hr>
+		<p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br><p>We Are STEVE...</p><br>
 	</body>
 </html>

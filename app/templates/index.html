@@ -6,35 +6,42 @@
 	</head>
 
 	<body>
-		{% if loginstatus %}
-			[debug] YOU ARE LOGGED IN.
-		{% else %}
-			[debug] YOU ARE NOT LOGGED IN.
-		{% endif %}
-
-		{% if loginstatus %}
-        <a href="/logout">
-            <button>Logout</button>
-        </a>
-        {% else %}
-        <a href="/login">
-            <button>Login</button>
-        </a>
-        {% endif %}
-
+		<div style="text-align:right;">
+			{% if loginstatus %}
+				Welcome, {{username}}
+			{% else %}
+				You are not logged in.
+			{% endif %}
+		</div>
+		<div id="login_logout_button">
+			{% if loginstatus %}
+	        <a href="/logout">
+	            <button>Logout</button>
+	        </a>
+	        {% else %}
+	        <a href="/login">
+	            <button>Login</button>
+	        </a>
+	        {% endif %}
+	    </div>
 
 		<h1>Minecraft Story Mode</h1>
-		<h2>
+
+		<hr><h2>
 			<a href="/">Home</a> |
 			<a href="/aboutus">About Us</a> |
 			<a href="/donate">Donate</a> | 
 			<a href="/newstory">New Story</a> |
 			<a href="/editstory">Edit Story</a> |
 			<a href="/profile">Profile</a> 
-		</h2>
-		<h2>Most recent story</h2>
-		<h3><a href={{current_story_link}}>{{recent_story_title}} by {{recent_story_user}}</a></h3>
-		<p>{{recent_story_date}}</p>
-		<p>{{recent_story_content}}</p>
+		</h2><hr>
+
+		<h3>Most Recent Story</h3>
+
+		<div class="story-container">
+			<h4><a href={{current_story_link}}>{{recent_story_title}} by {{recent_story_user}}</a></h4>
+			<p id="date">{{recent_story_date}}</p>
+			<p>{{recent_story_content}}</p>
+		</div>
 	</body>
 </html>

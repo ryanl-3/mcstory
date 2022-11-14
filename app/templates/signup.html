@@ -6,6 +6,11 @@
 	</head>
 
 	<body>
+        <div id="login_logout_button">
+           <a href="/">
+                <button>Back to Home</button>
+            </a>
+        </div>
 
 		<h1>Minecraft Story Mode</h1>
 
@@ -16,14 +21,14 @@
 		<form id = "login" method="POST">
             <p>
                 Username:
-                <input type=text name=signup_username>
+                <input class="textfield" type=text name=signup_username>
             </p>
             <p>
                 Password:
-                <input type=password name=signup_password>
+                <input class="textfield" type=password name=signup_password>
             </p>
             <p><a href="/login">Already have an account? Log in here.</a></p>
-            <input type=submit value="Sign Up">
+            <input class="loginbutton" type=submit value="Sign Up">
         </form>
 	</body>
 </html>

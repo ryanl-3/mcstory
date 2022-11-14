@@ -6,17 +6,28 @@
 	</head>
 
 	<body>
+        <div id="login_logout_button">
+            {% if loginstatus %}
+            <a href="/logout">
+                <button>Logout</button>
+            </a>
+            {% else %}
+            <a href="/login">
+                <button>Login</button>
+            </a>
+            {% endif %}
+        </div>
 
 		<h1>Minecraft Story Mode</h1>
 
-        <h2>
+        <hr><h2>
             <a href="/">Home</a> |
             <a href="/aboutus">About Us</a> |
             <a href="/donate">Donate</a> | 
             <a href="/newstory">New Story</a> |
             <a href="/editstory">Edit Story</a> |
             <a href="/profile">Profile</a> 
-        </h2>
+        </h2><hr>
 
 		<p>
             {{failmsg}}
