@@ -8,4 +8,12 @@
 A collaborative Minecraft story making website.
 
 ## Launch codes:
-N/A atm
+### Cloning:
+	git clone git@github.com:ryanl-3/mcstory.git
+### Virtual Environment
+Change into the mcstory directory.
+	python3 -m venv venv
+Activate the virtual environment
+	. venv/bin/activate
+Install requirements
+	pip install -r requirements.txt
