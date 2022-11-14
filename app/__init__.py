@@ -35,6 +35,10 @@ def check_username(username):
         return 0
     return 1
 
+def Union(lst1, lst2):
+    final_list = list(set(lst1) | set(lst2))
+    return final_list
+
 #adds user to user database
 def add_user(username, password, db_cursor):
     data = (username, password)
@@ -163,6 +167,36 @@ def get_story_by_id(id, db_cursor):
 
     return rows[0]
 
+def get_stories_by_title(title, db_cursor):
+    db_cursor.execute("SELECT * FROM stories")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if title.replace('+', ' ').lower() in row[1].lower():
+            list.append(row)
+    return list
+
+def get_stories_by_user(user, db_cursor):
+    db_cursor.execute("SELECT * FROM stories")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if user.replace('+', ' ').lower() in row[0].lower():
+            list.append(row)
+    return list
+
+def get_users_by_name(username, db_cursor):
+    db_cursor.execute("SELECT * FROM users")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if username.replace('+', ' ').lower() in row[0].lower():
+            list.append(row)
+    return list
+
 def edit_story(title, content, db_cursor):#goes to the story with the title and replaces its content with the input content
     db_cursor.execute("SELECT * FROM stories WHERE title=?", (title,))
     
@@ -218,10 +252,13 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST' and check_username(request.form['signup_username']) == 1 and check_password(request.form['signup_password']) == 1:
+        if not request.form['signup_password'] == request.form['signup_password_check']:
+            return render_template("signup.html", failmsg='Passwords dont match!')
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
         signup_username = request.form['signup_username']
         signup_password = request.form['signup_password']
+        signup_password_check = request.form['signup_password_check']
         if not user_exist(signup_username, c):
             add_user(signup_username, signup_password, c)
             db.commit()
@@ -267,13 +304,23 @@ def profile():
     login_status = False
     if 'username' in session:
         login_status = True
+    if not login_status:
+        return render_template("profile.html", loginstatus=login_status)
+    try:
+        currentuser=request.args['id']
+        db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+        c = db.cursor()
+        stories = get_user_total_stories(currentuser, c)
+        userstorieslist = get_user_stories(currentuser, c)
+        db.close()
+        return render_template("profile.html", loginstatus=login_status, username=currentuser, number_stories=stories, flask_list_stories=userstorieslist)
+    except:
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()
         stories = get_user_total_stories(session['username'], c)
         userstorieslist = get_user_stories(session['username'], c)
         db.close()
         return render_template("profile.html", loginstatus=login_status, username=session['username'], number_stories=stories, flask_list_stories=userstorieslist)
-    return render_template("profile.html", loginstatus=login_status) #'You are not logged in'
 
 @app.route('/newstory', methods=['GET', 'POST'])
 def newstory():
@@ -360,6 +407,23 @@ def stories():
     recentstorydate = currentstory[4]
     db.close()
     return render_template("stories.html", loginstatus=login_status, valid=isvalidstory, recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser)
+
+@app.route('/search')
+def search():
+    login_status = False
+    if 'username' in session:
+        login_status = True
+    try:
+        db = sqlite3.connect(DB_FILE)
+        c = db.cursor()
+        searchcontent = request.args['search']
+        storieslist = Union(get_stories_by_title(searchcontent, c), get_stories_by_user(searchcontent, c))
+        userslist = get_users_by_name(searchcontent, c)
+        db.close()
+        return render_template("search.html", loginstatus=login_status, flask_stories_results=storieslist, flask_users_results=userslist)
+    except:
+        return render_template("search.html", loginstatus=login_status)
+
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
