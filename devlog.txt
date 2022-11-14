@@ -14,4 +14,4 @@ josephJ Styled most of the pages, rerouted some pages. 2022-11-14 01:07
 samsonW editstory works now with the help of Ryan's helper function. Added a 'none' story page 2022-11-14 8:27
 samsonW updated readme and requirements 2022-11-14 9:05
 samsonW added recent stories and failmsg to editstories 2022-11-14 11:01
-samsonw added search bar. profile search not working yet 2022-11-14 12:45
+samsonw added search bar. needs a search button on nav (html) 2022-11-14 12:57

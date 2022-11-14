@@ -169,7 +169,17 @@ def get_stories_by_title(title, db_cursor):
     rows = db_cursor.fetchall()#returns a list with the story
 
     for row in rows:
-        if title in row[1]:
+        if title.replace('+', ' ').lower() in row[1].lower():
+            list.append(row)
+    return list
+
+def get_stories_by_user(user, db_cursor):
+    db_cursor.execute("SELECT * FROM stories")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if user.replace('+', ' ').lower() in row[0].lower():
             list.append(row)
     return list
 
@@ -179,7 +189,7 @@ def get_users_by_name(username, db_cursor):
     rows = db_cursor.fetchall()#returns a list with the story
 
     for row in rows:
-        if username in row[0]:
+        if username.replace('+', ' ').lower() in row[0].lower():
             list.append(row)
     return list
 
@@ -287,13 +297,21 @@ def profile():
     login_status = False
     if 'username' in session:
         login_status = True
+    try:
+        currentuser=request.args['id']
+        db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+        c = db.cursor()
+        stories = get_user_total_stories(currentuser, c)
+        userstorieslist = get_user_stories(currentuser, c)
+        db.close()
+        return render_template("profile.html", loginstatus=login_status, username=currentuser, number_stories=stories, flask_list_stories=userstorieslist)
+    except:
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()
         stories = get_user_total_stories(session['username'], c)
         userstorieslist = get_user_stories(session['username'], c)
         db.close()
         return render_template("profile.html", loginstatus=login_status, username=session['username'], number_stories=stories, flask_list_stories=userstorieslist)
-    return render_template("profile.html", loginstatus=login_status) #'You are not logged in'
 
 @app.route('/newstory', methods=['GET', 'POST'])
 def newstory():
@@ -390,7 +408,7 @@ def search():
         db = sqlite3.connect(DB_FILE)
         c = db.cursor()
         searchcontent = request.args['search']
-        storieslist = get_stories_by_title(searchcontent, c)
+        storieslist = get_stories_by_title(searchcontent, c) + get_stories_by_user(searchcontent, c)
         userslist = get_users_by_name(searchcontent, c)
         db.close()
         return render_template("search.html", loginstatus=login_status, flask_stories_results=storieslist, flask_users_results=userslist)
