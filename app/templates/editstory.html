@@ -29,14 +29,15 @@
             <a href="/profile">Profile</a> 
         </h2><hr>
 
+        {% if loginstatus %}
+        {% for story in flask_list_stories %}
+        <p><a href=/editstory?id={{story[3]}}>{{story[1]}}</a></p>
+        {% endfor %}
 		<p>
             {{failmsg}}
         </p>
-        {% if loginstatus %}
-            {% for story in flask_list_stories %}
-                <p><a href=/editstory?id={{story[3]}}>{{story[1]}}</a></p>
-            {% endfor %}
-
+        
+            {% if story_is_selected %}
             <form method="POST">
                 <p>
                     Story: {{selected_story}}<br><br>
@@ -44,6 +45,7 @@
                 </p>
                 <input type=submit value="Submit!">
             </form>
+            {% endif %}
         {% else %}
             You must be logged in to use this feature.
         {% endif %}
