@@ -163,6 +163,26 @@ def get_story_by_id(id, db_cursor):
 
     return rows[0]
 
+def get_stories_by_title(title, db_cursor):
+    db_cursor.execute("SELECT * FROM stories")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if title in row[1]:
+            list.append(row)
+    return list
+
+def get_users_by_name(username, db_cursor):
+    db_cursor.execute("SELECT * FROM users")
+    list = []
+    rows = db_cursor.fetchall()#returns a list with the story
+
+    for row in rows:
+        if username in row[0]:
+            list.append(row)
+    return list
+
 def edit_story(title, content, db_cursor):#goes to the story with the title and replaces its content with the input content
     db_cursor.execute("SELECT * FROM stories WHERE title=?", (title,))
     
@@ -360,6 +380,23 @@ def stories():
     recentstorydate = currentstory[4]
     db.close()
     return render_template("stories.html", loginstatus=login_status, valid=isvalidstory, recent_story_title=recentstorytitle, recent_story_content=recentstorycontent, recent_story_date=recentstorydate, recent_story_user=recentstoryuser)
+
+@app.route('/search')
+def search():
+    login_status = False
+    if 'username' in session:
+        login_status = True
+    try:
+        db = sqlite3.connect(DB_FILE)
+        c = db.cursor()
+        searchcontent = request.args['search']
+        storieslist = get_stories_by_title(searchcontent, c)
+        userslist = get_users_by_name(searchcontent, c)
+        db.close()
+        return render_template("search.html", loginstatus=login_status, flask_stories_results=storieslist, flask_users_results=userslist)
+    except:
+        return render_template("search.html", loginstatus=login_status)
+
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

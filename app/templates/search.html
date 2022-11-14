@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Search</title>
+		<link rel="stylesheet" href="../static/css/style.css">
+	</head>
+
+	<body>
+		<div style="text-align:right;">
+			{% if loginstatus %}
+				Welcome, {{username}}
+			{% else %}
+				You are not logged in.
+			{% endif %}
+		</div>
+		<div id="login_logout_button">
+			{% if loginstatus %}
+	        <a href="/logout">
+	            <button>Logout</button>
+	        </a>
+	        {% else %}
+	        <a href="/login">
+	            <button>Login</button>
+	        </a>
+	        {% endif %}
+	    </div>
+
+		<h1>Minecraft Story Mode</h1>
+
+		<hr><h2>
+			<a href="/">Home</a> |
+			<a href="/aboutus">About Us</a> |
+			<a href="/donate">Donate</a> | 
+			<a href="/newstory">New Story</a> |
+			<a href="/editstory">Edit Story</a> |
+			<a href="/profile">Profile</a> 
+		</h2><hr>
+
+        <p>
+            <form action="/search?search="{search}>
+                <input class="textfield" type="text" placeholder="Search..." name="search">
+                <input class="loginbutton" type=submit value=Search>
+              </form>
+        </p>
+
+		<h3>Users</h3>
+
+		{% for user in flask_users_results %}
+			<h4><a href=/profile?id={{user[0]}}>{{user[0]}}</a></h4>
+		{% endfor %}
+
+		<h3>Stories</h3>
+
+		{% for story in flask_stories_results %}
+		<div class="story-container">
+			<h4><a href=/stories?id={{story[3]}}>{{story[1]}} by {{story[0]}}</a></h4>
+			<p id="date">{{story[4]}}</p>
+			<p>{{story[2]}}</p>
+		</div>
+		{% endfor %}
+
+        
+	</body>
+</html>
