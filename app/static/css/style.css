@@ -3,8 +3,10 @@ body{
 	margin-left:5%;
 	margin-right:5%;
 	
-	background-size:100px;
-	background-image:url(https://i.pinimg.com/originals/2a/b1/c3/2ab1c37cfdff720c6de2ddb07328f145.jpg);
+	background-size:100px, 100%;
+	background-image:url(https://i.pinimg.com/originals/2a/b1/c3/2ab1c37cfdff720c6de2ddb07328f145.jpg),linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+	background-attachment:scroll,fixed;
+	background-blend-mode:darken;
 	color:rgb(250,250,250);
 }
 
@@ -36,12 +38,16 @@ h4{
 
 p{
 	font-size: 25px;
-	font-weight: bold;
+	font-weight: 540;
 }
 
 a{
 	text-decoration: none;
 	color: rgb(20,225,100);
+}
+
+a:hover{
+	color: rgb(20,185,100);
 }
 
 hr{
@@ -84,8 +90,14 @@ hr{
 	font-size:15px;
 }
 
+#failmsg{
+	color:rgb(255,255,20);
+	font-weight:bold;
+}
+
 .story-container{
 	border:1px solid rgb(20,225,100);
+	border-left:5px solid rgb(20,225,100);
 	padding-left:30px;
 	padding-right:30px;
 	background-image: linear-gradient(to left, rgba(20,225,100,0.3) , rgba(255,255,255,0.1));
@@ -93,10 +105,32 @@ hr{
 }
 
 .search-button{
-	margin-left:-110px;
-	height:40px;
+	margin-left:-40px;
+	font-size:20px;
+	height:100px;
 	width:100px;
-	border-radius:22px;
+	border-radius:50%;
+}
+
+.search-button:hover, button:hover, .loginbutton:hover{
+	background-color:rgb(20,225,100);
+}
+
+#yeah{
+	width:50%;
+	height:100%;
+	position: fixed;
+	bottom: -50%;
+	left: -30%;
+	background-size:500px;
+	background-repeat:no-repeat;
+	background-position:right;
+	background-image:url(https://www.smashbros.com/assets_v2/img/fighter/steve/main.png);
+}
+
+#yeah:hover{
+	left: -30%;
+	background-image:url(https://media0.giphy.com/media/3ohhwxWx4WpPTwQYuc/giphy.gif?cid=6c09b952a8mun1kk6iuzh48gjpd783bc5xhz578k81mewr1h&rid=giphy.gif&ct=s);
 }
 
 form{
