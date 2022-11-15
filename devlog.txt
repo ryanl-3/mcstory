@@ -17,3 +17,4 @@ samsonW added recent stories and failmsg to editstories 2022-11-14 11:01
 samsonw added search bar. needs a search button on nav (html) 2022-11-14 12:57
 josephJ added search on nav 2022-11-14 13:50
 samsonW separated functions from __init__.py to db.py 2022-11-14 14:46
+Joseph revised nav bar and styled some more 2022-11-14 20:02
