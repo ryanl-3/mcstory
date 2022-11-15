@@ -32,10 +32,14 @@
         
 		<p>	{% if loginstatus %}
 			<p>Username: {{username}}</p>
-			<p>Stories: {{number_stories}}</p>
-			{% for story in flask_list_stories %}
-				<p><a href=/stories?id={{story[3]}}>{{story[1]}}</a></p>
-			{% endfor %}
+			<p>Entries: {{number_stories}}</p>
+            {% for story in flask_list_stories %}
+            <div class="story-container">
+                <h4><a href=/stories?id={{story[3]}}>{{story[1]}} by {{story[0]}}</a></h4>
+                <p id="date">{{story[4]}}</p>
+                <p>{{story[2]}}</p>
+            </div>
+            {% endfor %}
 		{% else %}
 			Please login.
 		{% endif %}</p>

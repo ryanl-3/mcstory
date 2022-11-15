@@ -1,20 +1,131 @@
-josephJ Created html pages for login, response, and home 2022-11-10 13:35
-samsonW Setup the flask routes to the index, login, signup, about, donate, and login 2022-11-10 14:41
-ryanL Created the users and stories tables with functions to access and store in tables 2022-11-11 00:26
-josephJ Created newstory.html and editstory.html with forms for them 2022-11-11 11:01
-josephJ Added donate.html and profile.html 2022-11-11 11:01
-samsonW Made working login/signup with databases (NEEDS TESTING!) 2022-11-11 21:00
-ryanL Fixed db functions with "?"s to catch bad injections. 2022-11-12 00:25
-josephJ Added link to login.html on signup.html 2022-11-12 10:12
-samsonW Prepared recent story display on index.html. Waiting on sqlite3 helper functions 2022-11-12 10:25
-ryanL Imported datetime, added column date to stories db, edited add_story function to include time/date, added recent_story, print_users, and print_stories functions 2022-11-12 16:59
-samsonW Created /stories to view stories. Added recent story to homepage. Added stories list to profile. 2022-11-13 15:12
-ryanL Created a edit_story function to edit a content with the title name and replacment content 2022-11-13 21:55
-josephJ Styled most of the pages, rerouted some pages. 2022-11-14 01:07
-samsonW editstory works now with the help of Ryan's helper function. Added a 'none' story page 2022-11-14 8:27
-samsonW updated readme and requirements 2022-11-14 9:05
-samsonW added recent stories and failmsg to editstories 2022-11-14 11:01
-samsonw added search bar. needs a search button on nav (html) 2022-11-14 12:57
-josephJ added search on nav 2022-11-14 13:50
-samsonW separated functions from __init__.py to db.py 2022-11-14 14:46
-Joseph revised nav bar and styled some more 2022-11-14 20:02
+STEVE
+Ryan Lee
+Joseph Jeon
+Samson Wu
+pd 8
+---------------------------------
+Minecraft Blogs
+ ______   ______   __   __   __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+ALL -- 2022-11-9 14:21
+--------------------------------------------------------------
+Revised design doc to include map or routes and more in depth role requirements
+==============================================================
+
+josephJ -- 2022-11-10 13:35
+--------------------------------------------------------------
+Created html pages for login, response, and home
+==============================================================
+
+samsonW -- 2022-11-10 14:41
+--------------------------------------------------------------
+Setup the flask routes to the index, login, signup, about, donate, and login
+==============================================================
+
+ryanL -- 2022-11-11 00:26
+--------------------------------------------------------------
+Created the users and stories tables with functions to access and store in tables
+==============================================================
+
+josephJ -- 2022-11-11 11:01
+--------------------------------------------------------------
+Created newstory.html and editstory.html with forms for them
+==============================================================
+
+josephJ -- 2022-11-11 11:01
+--------------------------------------------------------------
+Added donate.html and profile.html
+==============================================================
+
+samsonW -- 2022-11-11 21:00
+--------------------------------------------------------------
+Made working login/signup with databases (NEEDS TESTING!)
+==============================================================
+
+ryanL -- 2022-11-12 00:25
+--------------------------------------------------------------
+Fixed db functions with "?"s to catch bad injections.
+==============================================================
+
+josephJ -- 2022-11-12 10:12
+--------------------------------------------------------------
+Added link to login.html on signup.html
+==============================================================
+
+samsonW -- 2022-11-12 10:25
+--------------------------------------------------------------
+Prepared recent story display on index.html. Waiting on sqlite3 helper functions
+==============================================================
+
+ryanL -- 2022-11-12 16:59
+--------------------------------------------------------------
+Imported datetime, added column date to stories db, edited add_story function to include time/date, added recent_story, print_users, and print_stories functions
+==============================================================
+
+samsonW -- 2022-11-13 15:12
+--------------------------------------------------------------
+Created /stories to view stories. Added recent story to homepage. Added stories list to profile.
+==============================================================
+
+ryanL -- 2022-11-13 21:55
+--------------------------------------------------------------
+Created a edit_story function to edit a content with the title name and replacment content
+==============================================================
+
+josephJ -- 2022-11-14 01:07
+--------------------------------------------------------------
+Styled most of the pages, rerouted some pages.
+==============================================================
+
+samsonW -- 2022-11-14 8:27
+--------------------------------------------------------------
+editstory works now with the help of Ryan's helper function. Added a 'none' story page
+==============================================================
+
+samsonW -- 2022-11-14 9:05
+--------------------------------------------------------------
+updated readme and requirements
+==============================================================
+
+samsonW -- 2022-11-14 11:01
+--------------------------------------------------------------
+added recent stories and failmsg to editstories
+==============================================================
+
+samsonW -- 2022-11-14 12:57
+--------------------------------------------------------------
+added search bar. needs a search button on nav (html)
+==============================================================
+
+josephJ -- 2022-11-14 13:50
+--------------------------------------------------------------
+added search on nav
+==============================================================
+
+samsonW -- 2022-11-14 14:46
+--------------------------------------------------------------
+separated functions from __init__.py to db.py
+==============================================================
+
+josephJ -- 2022-11-14 20:02
+--------------------------------------------------------------
+revised nav bar and styled some more
+==============================================================
+
+samsonW -- 2022-11-14 20:43
+--------------------------------------------------------------
+Restructured repo, devlog, and made small changes to design doc
+==============================================================
+
+josephJ -- 2022-11-14 22:59
+--------------------------------------------------------------
+Implemented newlines and a word truncator
+==============================================================

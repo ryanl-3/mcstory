@@ -122,14 +122,14 @@ def profile():
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()
         stories = get_user_total_stories(currentuser, c)
-        userstorieslist = get_user_stories(currentuser, c)
+        userstorieslist = get_user_stories(currentuser, c)[::-1]
         db.close()
         return render_template("profile.html", loginstatus=login_status, username=currentuser, number_stories=stories, flask_list_stories=userstorieslist)
     except:
         db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
         c = db.cursor()
         stories = get_user_total_stories(session['username'], c)
-        userstorieslist = get_user_stories(session['username'], c)
+        userstorieslist = get_user_stories(session['username'], c)[::-1]
         db.close()
         return render_template("profile.html", loginstatus=login_status, username=session['username'], number_stories=stories, flask_list_stories=userstorieslist)
 

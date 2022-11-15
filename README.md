@@ -1,11 +1,11 @@
-# MCStory by STEVE
+# Minecraft Blogs by STEVE
 ## Roster: 
 * Ryan Lee: PM, Database guy
 * Joseph Jeon: HTML/Frontend guy
 * Samson Wu: Flask guy
 
 ## Description:
-A collaborative Minecraft story making website.
+A Minecraft-themed blogging website.
 
 ## Launch codes:
 ### Cloning:
@@ -20,4 +20,4 @@ A collaborative Minecraft story making website.
 #### Install requirements:
 	pip install -r requirements.txt
 #### Run Flask app:
-	python3 __init__.py
+	python3 app/__init__.py
