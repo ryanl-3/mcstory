@@ -43,7 +43,10 @@
 		<div class="story-container">
 			<h4><a href=/stories?id={{story[3]}}>{{story[1]}} by {{story[0]}}</a></h4>
 			<p id="date">{{story[4]}}</p>
-			<p>{{story[2]}}</p>
+			<p style="white-space: pre-wrap;">{{story[2]|truncate(2000)}}</p>
+			{% if story[2]|length>2000 %}
+				<p style="font-weight:900;"><a href=/stories?id={{story[3]}}>Read More</a></p>
+			{% endif %}
 		</div>
 		{% endfor %}
 	</body>
