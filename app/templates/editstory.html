@@ -43,9 +43,9 @@
             <form method="POST">
                 <p>
                     Entry: {{selected_story}}<br><br>
-                    <textarea id="story" type=text name=addition rows="5" cols="33" placeholder="What happens next?">{{current_story_stuff}}</textarea>
+                    <textarea style="resize:vertical;" id="story" type=text name=addition rows="5" cols="33" placeholder="What happens next?">{{current_story_stuff}}</textarea>
                 </p>
-                <input type=submit value="Submit!">
+                <input class="loginbutton" type=submit value="Submit!">
             </form>
             {% endif %}
         {% else %}
